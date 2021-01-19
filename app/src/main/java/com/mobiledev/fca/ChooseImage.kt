@@ -17,31 +17,26 @@ import androidx.core.app.ActivityCompat
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.io.OutputStream
 
 
 class ChooseImage: AppCompatActivity() {
     lateinit var bitMap: Bitmap
     private val GALLERY_REQUEST_CODE = 123
     private val TAKE_IMAGE_REQUEST_CODE = 122
-//    private val STORAGE_PERMISSIONS = arrayOf(
-//            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//            Manifest.permission.READ_EXTERNAL_STORAGE
-//    )
+
     private val PERMISSION_ALL = 1
-//    private var permissions= arrayOf("android.Manifest.permission.WRITE_EXTERNAL_STORAGE", "android.Manifest.permission.WRITE_EXTERNAL_CAMERA",
-//            "android.Manifest.permission.READ_EXTERNAL_STORAGE")
+
     private val PERMISSIONS = arrayOf(
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.CAMERA
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.choose_image)
 
-        while (!hasPermissions(this, *PERMISSIONS)) {
+        if (!hasPermissions(this, *PERMISSIONS)) {
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
         }
         initObject()
@@ -60,7 +55,10 @@ class ChooseImage: AppCompatActivity() {
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_PICK
-            startActivityForResult(Intent.createChooser(intent, "Pick an image"), this.GALLERY_REQUEST_CODE)
+            startActivityForResult(
+                Intent.createChooser(intent, "Pick an image"),
+                this.GALLERY_REQUEST_CODE
+            )
         }
     }
 
@@ -83,10 +81,18 @@ class ChooseImage: AppCompatActivity() {
                 this.GALLERY_REQUEST_CODE -> {
                     val selectedImage = data?.data
                     try {
-                        val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImage)
+                        val bitmap = MediaStore.Images.Media.getBitmap(
+                            this.contentResolver,
+                            selectedImage
+                        )
                         bitMap = bitmap
+
                         var img = findViewById<ImageView>(R.id.abc)
                         img.setImageBitmap(bitMap)
+                        val intent = intent
+                        intent.putExtra("BitmapImage", bitMap)
+                        setResult(RESULT_OK, intent)
+                        finish()
                     } catch (e: IOException) {
                         Log.i("ChooseImage", "Some exception $e")
                     }
@@ -97,6 +103,10 @@ class ChooseImage: AppCompatActivity() {
                     var img = findViewById<ImageView>(R.id.abc)
                     img.setImageBitmap(bitMap)
                     saveImageToExternalStorage(bitmap)
+                    val intent = intent
+                    intent.putExtra("BitmapImage", bitMap)
+                    setResult(RESULT_OK, intent)
+                    finish()
                 }
             }
         }
@@ -120,7 +130,8 @@ class ChooseImage: AppCompatActivity() {
         }
         // Tell the media scanner about the new file so that it is
         // immediately available to the user.
-        MediaScannerConnection.scanFile(this, arrayOf(file.toString()), null
+        MediaScannerConnection.scanFile(
+            this, arrayOf(file.toString()), null
         ) { path, uri ->
             Log.i("ExternalStorage", "Scanned $path:")
             Log.i("ExternalStorage", "-> uri=$uri")
