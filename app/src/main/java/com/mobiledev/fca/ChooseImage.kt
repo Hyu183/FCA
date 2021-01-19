@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
@@ -23,7 +22,7 @@ class ChooseImage: AppCompatActivity() {
     lateinit var bitMap: Bitmap
     private val GALLERY_REQUEST_CODE = 123
     private val TAKE_IMAGE_REQUEST_CODE = 122
-
+    //lateinit var uri : URI
     private val PERMISSION_ALL = 1
 
     private val PERMISSIONS = arrayOf(
@@ -86,10 +85,11 @@ class ChooseImage: AppCompatActivity() {
                             selectedImage
                         )
                         bitMap = bitmap
-
-                        var img = findViewById<ImageView>(R.id.abc)
-                        img.setImageBitmap(bitMap)
+//                        var img = findViewById<ImageView>(R.id.abc)
+//                        img.setImageBitmap(bitMap)
                         val intent = intent
+//                        intent.putExtra("URI", selectedImage)
+//                        intent.putExtra("Gallery",1)
                         intent.putExtra("BitmapImage", bitMap)
                         setResult(RESULT_OK, intent)
                         finish()
@@ -100,8 +100,8 @@ class ChooseImage: AppCompatActivity() {
                 this.TAKE_IMAGE_REQUEST_CODE -> {
                     val bitmap = data?.extras!!["data"] as Bitmap
                     bitMap = bitmap
-                    var img = findViewById<ImageView>(R.id.abc)
-                    img.setImageBitmap(bitMap)
+//                    var img = findViewById<ImageView>(R.id.abc)
+//                    img.setImageBitmap(bitMap)
                     saveImageToExternalStorage(bitmap)
                     val intent = intent
                     intent.putExtra("BitmapImage", bitMap)
@@ -122,7 +122,7 @@ class ChooseImage: AppCompatActivity() {
         if (file.exists()) file.delete()
         try {
             val out = FileOutputStream(file)
-            finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)
+            finalBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
             out.flush()
             out.close()
         } catch (e: Exception) {
@@ -137,4 +137,5 @@ class ChooseImage: AppCompatActivity() {
             Log.i("ExternalStorage", "-> uri=$uri")
         }
     }
+
 }

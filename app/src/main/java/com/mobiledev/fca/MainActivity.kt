@@ -1,5 +1,6 @@
 package com.mobiledev.fca
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -17,7 +18,7 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //initObjects()
+        initObjects()
     }
     //TEST
     private fun initObjects() {
@@ -35,11 +36,18 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.classify -> {
-                //setContentView(R.layout.choose_image)
-                Toast.makeText(this, "Classify", Toast.LENGTH_SHORT).show()}
-            R.id.artStyle -> setContentView(R.layout.choose_image)
+                val intent = Intent(this, Classify::class.java)
+                startActivityForResult(intent, 1)
+            }
+            R.id.artStyle -> {
+                val intent = Intent(this, ArtStyle::class.java)
+                startActivityForResult(intent, 2)
+            }
             R.id.removeBackground -> setContentView(R.layout.choose_image)
-            R.id.superResolution -> setContentView(R.layout.choose_image)
+            R.id.superResolution -> {
+                val intent = Intent(this, SuperResolution::class.java)
+                startActivityForResult(intent, 4)
+            }
             else -> Log.d("Test","fail")
         }
     }
