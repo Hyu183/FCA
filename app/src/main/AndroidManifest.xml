@@ -21,6 +21,7 @@
         <activity android:name=".Classify"></activity>
         <activity android:name=".SuperResolution"></activity>
         <activity android:name=".ArtStyle"></activity>
+        <activity android:name=".ComingSoon"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
