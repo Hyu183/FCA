@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
         superResolution = findViewById<CardView>(R.id.superResolution)
         classify.setOnClickListener(this)
         artStyle.setOnClickListener(this)
+        removeBackground.setOnClickListener(this)
         superResolution.setOnClickListener(this)
     }
 
@@ -39,6 +40,10 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
             R.id.artStyle -> {
                 val intent = Intent(this, ArtStyle::class.java)
                 startActivityForResult(intent, 2)
+            }
+            R.id.removeBackground ->  {
+                val intent = Intent(this, ComingSoon::class.java)
+                startActivityForResult(intent, 3)
             }
             R.id.superResolution -> {
                 val intent = Intent(this, SuperResolution::class.java)
