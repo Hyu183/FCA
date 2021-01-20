@@ -17,7 +17,7 @@ import java.io.File
 import java.io.FileOutputStream
 
 class SuperResolution:AppCompatActivity() {
-    val SEC_ACT_REQ_CODE = 2
+    val SEC_ACT_REQ_CODE = 4
     private lateinit var obj: Bitmap
 
     override fun onCreate(savedInstanceState: Bundle?) {
