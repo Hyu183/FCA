@@ -1,1 +1,1 @@
-# FCA - Flower Classify Application
+# FCA - Flower Classification Application
