@@ -10,7 +10,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.mobiledev.fca.ml.WhiteboxCartoonGanDr
 import com.mobiledev.fca.ml.WhiteboxCartoonGanFp16
 import org.tensorflow.lite.support.image.TensorImage
 import java.io.File
@@ -37,10 +36,9 @@ class ArtStyle:AppCompatActivity() {
 
                 obj = data?.getParcelableExtra<Bitmap>("BitmapImage")!!
                 setContentView(R.layout.art_style)
+
                 val btnSave = findViewById<Button>(R.id.btnSave)
                 val model = WhiteboxCartoonGanFp16.newInstance(this)
-                //val model = WhiteboxCartoonGanDr.newInstance(this)
-
 
                 // Runs model inference and gets result.
                 val originalImage = TensorImage.fromBitmap(obj)

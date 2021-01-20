@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
         setContentView(R.layout.activity_main)
         initObjects()
     }
-    //TEST
     private fun initObjects() {
         classify = findViewById<CardView>(R.id.classify)
         artStyle = findViewById<CardView>(R.id.artStyle)
@@ -28,11 +27,9 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
         superResolution = findViewById<CardView>(R.id.superResolution)
         classify.setOnClickListener(this)
         artStyle.setOnClickListener(this)
-        removeBackground.setOnClickListener(this)
         superResolution.setOnClickListener(this)
     }
 
-    //TEST
     override fun onClick(v: View) {
         when (v.id) {
             R.id.classify -> {
@@ -43,7 +40,6 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
                 val intent = Intent(this, ArtStyle::class.java)
                 startActivityForResult(intent, 2)
             }
-            R.id.removeBackground -> setContentView(R.layout.choose_image)
             R.id.superResolution -> {
                 val intent = Intent(this, SuperResolution::class.java)
                 startActivityForResult(intent, 4)

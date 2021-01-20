@@ -42,13 +42,12 @@ class SuperResolution:AppCompatActivity() {
                 val imageViewEnhanced: ImageView = findViewById(R.id.imageview_enhanced)
                 imageViewOriginal.setImageBitmap(obj)
 
-                //val model = EsrganFp16.newInstance(this)
                 val model = Esrgan.newInstance(this)
 
-// Creates inputs for reference.
+                // Creates inputs for reference.
                 val originalImage = TensorImage.fromBitmap(obj)
 
-// Runs model inference and gets result.
+                // Runs model inference and gets result.
                 val outputs = model.process(originalImage)
                 val enhancedImage = outputs.enhancedImageAsTensorImage
                 val enhancedImageBitmap = enhancedImage.bitmap
@@ -58,7 +57,7 @@ class SuperResolution:AppCompatActivity() {
                     Toast.makeText(this,"Saved Successfully",Toast.LENGTH_SHORT).show()
                 }
 
-// Releases model resources if no longer used.
+                // Releases model resources if no longer used.
                 model.close()
                 imageViewEnhanced.setImageBitmap(enhancedImageBitmap)
 

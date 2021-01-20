@@ -26,9 +26,9 @@ class ChooseImage: AppCompatActivity() {
     private val PERMISSION_ALL = 1
 
     private val PERMISSIONS = arrayOf(
-        Manifest.permission.READ_EXTERNAL_STORAGE,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.CAMERA
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,17 +79,14 @@ class ChooseImage: AppCompatActivity() {
             when (requestCode) {
                 this.GALLERY_REQUEST_CODE -> {
                     val selectedImage = data?.data
+
                     try {
                         val bitmap = MediaStore.Images.Media.getBitmap(
-                            this.contentResolver,
-                            selectedImage
+                                this.contentResolver,
+                                selectedImage
                         )
                         bitMap = bitmap
-//                        var img = findViewById<ImageView>(R.id.abc)
-//                        img.setImageBitmap(bitMap)
                         val intent = intent
-//                        intent.putExtra("URI", selectedImage)
-//                        intent.putExtra("Gallery",1)
                         intent.putExtra("BitmapImage", bitMap)
                         setResult(RESULT_OK, intent)
                         finish()
@@ -100,8 +97,6 @@ class ChooseImage: AppCompatActivity() {
                 this.TAKE_IMAGE_REQUEST_CODE -> {
                     val bitmap = data?.extras!!["data"] as Bitmap
                     bitMap = bitmap
-//                    var img = findViewById<ImageView>(R.id.abc)
-//                    img.setImageBitmap(bitMap)
                     saveImageToExternalStorage(bitmap)
                     val intent = intent
                     intent.putExtra("BitmapImage", bitMap)
@@ -131,11 +126,10 @@ class ChooseImage: AppCompatActivity() {
         // Tell the media scanner about the new file so that it is
         // immediately available to the user.
         MediaScannerConnection.scanFile(
-            this, arrayOf(file.toString()), null
+                this, arrayOf(file.toString()), null
         ) { path, uri ->
             Log.i("ExternalStorage", "Scanned $path:")
             Log.i("ExternalStorage", "-> uri=$uri")
         }
     }
-
 }

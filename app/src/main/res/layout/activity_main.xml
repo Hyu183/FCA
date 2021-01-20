@@ -53,7 +53,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center_horizontal|center_vertical"
-                    android:src="@drawable/feedback"
+                    android:src="@drawable/flowers"
 
                     />
 
@@ -91,7 +91,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center_horizontal|center_vertical"
-                    android:src="@drawable/feedback"
+                    android:src="@drawable/art"
 
                     />
 
@@ -114,6 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             app:cardCornerRadius="10dp"
+
             app:cardElevation="7dp">
 
             <LinearLayout
@@ -127,7 +128,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center_horizontal|center_vertical"
-                    android:src="@drawable/feedback"
+                    android:src="@drawable/rm"
 
                     />
 
@@ -164,7 +165,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center_horizontal|center_vertical"
-                    android:src="@drawable/feedback"
+                    android:src="@drawable/sr"
 
                     />
 
